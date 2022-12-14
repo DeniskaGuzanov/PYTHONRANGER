@@ -9,7 +9,7 @@
 lst = [i for i in range(1, 10) if i % 2 != 0]
 sum = 0
 for i in lst:
-    sum+= i
+    sum = sum + i 
 
 print(lst)
 print(sum)
