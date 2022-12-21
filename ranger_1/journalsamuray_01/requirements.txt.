@@ -1,0 +1,7 @@
+Для запуска программы необходимо наличие библиотеки 'pandas'
+
+Команда для скачивания библиотеки:
+
+Windows - pip install pandas
+
+Mac OC,Linux - pip3 install pandas 
