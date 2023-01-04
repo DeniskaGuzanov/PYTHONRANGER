@@ -13,8 +13,8 @@ def create():
 
 
 def add(update, context):
-    user = update.message.from_user(input("Введите имя: "))
-    logger.info("Пользователь ввел число: %s: %s", user.first_name, update.message.text)
+    name = update.message.from_user(input("Введите имя: "))
+    logger.info("Пользователь ввел число: %s: %s", name.first_name, update.message.text)
     get_user = update.message.text
     context.user_data[add] = get_user
     update.message.reply_text(surname = input('Введите Фамилию'))
