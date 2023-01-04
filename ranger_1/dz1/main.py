@@ -1,3 +1,4 @@
+# Ознакомьтесь с файлом requirements.txt
 import logging
 from bot import TOKEN
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler)
