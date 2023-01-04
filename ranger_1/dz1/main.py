@@ -1,9 +1,8 @@
-# Ознакомьтесь с файлом requirements.txt
 import logging
 from bot import TOKEN
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler)
 
-# Логирование
+
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -26,7 +25,7 @@ def choice(update, context):
             update.message.reply_text('Спасибо, до свидания!')
             return ConversationHandler.END     
     else:
-        update.message.reply_text('Ошибка ввода. Введите цифру операции: \n 1 - операции с числами;\n3 - для выхода \n')
+        update.message.reply_text('Ошибка ввода. Введите цифру операции: \n 1 - операции с числами;\n2 - для выхода \n')
 
 def number_one(update, context):
     user = update.message.from_user
