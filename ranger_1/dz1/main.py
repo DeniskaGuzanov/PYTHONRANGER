@@ -53,6 +53,31 @@ def number_two(update, context):
         context.user_data['number_two'] = get_number
         update.message.reply_text('Выберите действие: \n\n+ - для сложения; \n- - для вычетания; \n* - для умножения; \n/ - для деления. \n')
         return NUMBER_OPERATION
+        
+def number_operation(update, context):
+    user = update.message.from_user
+    logger.info(
+        "Пользователь выбрал операцию %s: %s", user.first_name, update.message.text)
+    number_one = context.user_data.get('number_one')
+    number_two = context.user_data.get('number_two')
+    user_choice = update.message.text
+    if user_choice in '+-/*':
+        if user_choice == '+':
+            result = number_one + number_two
+        if user_choice == '-':
+            result = number_one - number_two
+        if user_choice == '*':
+            result = number_one * number_two
+        if user_choice == '/':
+            try:
+                result = number_one / number_two
+            except:
+                update.message.reply_text('Деление на ноль запрещено')
+        update.message.reply_text(f'Результат: {number_one} {user_choice} {number_two} = {result}')
+        return ConversationHandler.END
+    else:
+        update.message.reply_text('Ошибка ввода. Выберите действие: \n+ - для сложения; \n- - для вычетания; \n* - для умножения; \n/ - для деления. \n' )
+
 
 def complex_1(update, context):
     user = update.message.from_user
@@ -105,34 +130,10 @@ def complex_operation(update, context):
                 result = complex_1 / complex_2
             except:
                 update.message.reply_text('Деление на ноль запрещено')
-        update.message.reply_text(f'Результат: {complex_1} + {complex_2} = {result}')
+        update.message.reply_text(f'Результат: {complex_1} {user_choice} {complex_2} = {result}')
         return ConversationHandler.END
     else:
         update.message.reply_text('Ошибка ввода. \n+ - для сложения; \n- - для вычетания; \n* - для умножения; \n/ - для деления. \n')
-
-def number_operation(update, context):
-    user = update.message.from_user
-    logger.info(
-        "Пользователь выбрал операцию %s: %s", user.first_name, update.message.text)
-    number_one = context.user_data.get('number_one')
-    number_two = context.user_data.get('number_two')
-    user_choice = update.message.text
-    if user_choice in '+-/*':
-        if user_choice == '+':
-            result = number_one + number_two
-        if user_choice == '-':
-            result = number_one - number_two
-        if user_choice == '*':
-            result = number_one * number_two
-        if user_choice == '/':
-            try:
-                result = number_one / number_two
-            except:
-                update.message.reply_text('Деление на ноль запрещено')
-        update.message.reply_text(f'Результат: {number_one} {user_choice} {number_two} = {result}')
-        return ConversationHandler.END
-    else:
-        update.message.reply_text('Ошибка ввода. Выберите действие: \n+ - для сложения; \n- - для вычетания; \n* - для умножения; \n/ - для деления. \n' )
 
 
 def cancel(update, _):
@@ -155,9 +156,9 @@ if __name__ == '__main__':
             NUMBER_ONE: [MessageHandler(Filters.text, number_one)],
             NUMBER_TWO: [MessageHandler(Filters.text, number_two)],
             NUMBER_OPERATION: [MessageHandler(Filters.text, number_operation)],
-            COMPLEX_1: [MessageHandler(Filters.text, number_operation)],
-            COMPLEX_2: [MessageHandler(Filters.text, number_operation)],
-            COMPLEX_OPERATION: [MessageHandler(Filters.text, number_operation)]
+            COMPLEX_1: [MessageHandler(Filters.text, complex_1)],
+            COMPLEX_2: [MessageHandler(Filters.text, complex_2)],
+            COMPLEX_OPERATION: [MessageHandler(Filters.text, complex_operation)]
           
         },
         fallbacks=[CommandHandler('cancel', cancel)],
