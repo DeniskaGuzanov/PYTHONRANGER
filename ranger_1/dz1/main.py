@@ -1,7 +1,7 @@
 import logging
 from bot import TOKEN
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler)
-
+# Для установки файла requirements.txt    ----  pip freeze > requirements.txt
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
